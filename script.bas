@@ -18,7 +18,6 @@ Sub summarizeTradingData()
     Dim maxPercentLoss As Double
     
     For Each sheet In ThisWorkbook.Worksheets
-    
         finalRow = sheet.Cells(Rows.Count, 1).End(xlUp).Row
         
         sheet.Cells(1, 9).Value = "Ticker"
@@ -30,19 +29,15 @@ Sub summarizeTradingData()
         rowIndex = 2
         
         For i = 2 To finalRow
-        
             symbol = sheet.Cells(i, 1).Value
             
             If symbol <> sheet.Cells(i - 1, 1).Value Then
-            
                 firstPrice = sheet.Cells(i, 3).Value
-            
             End If
             
             totalVolume = totalVolume + sheet.Cells(i, 7).Value
             
             If symbol <> sheet.Cells(i + 1, 1).Value Then
-                
                 lastPrice = sheet.Cells(i, 6).Value
                 changeValue = lastPrice - firstPrice
                 percentDiff = ((lastPrice - firstPrice) / firstPrice)
@@ -79,21 +74,17 @@ Sub summarizeTradingData()
         maxVolume = 0
         
         For i = 2 To finalRow
-        
             If sheet.Cells(i, 11).Value > maxPercentGain Then
                 maxPercentGain = sheet.Cells(i, 11).Value
                 maxGainTicker = sheet.Cells(i, 9).Value
-            
             ElseIf sheet.Cells(i, 11).Value < maxPercentLoss Then
                 maxPercentLoss = sheet.Cells(i, 11).Value
                 maxLossTicker = sheet.Cells(i, 9).Value
-                
             End If
             
             If sheet.Cells(i, 12).Value > maxVolume Then
                 maxVolume = sheet.Cells(i, 12).Value
                 maxVolumeTicker = sheet.Cells(i, 9).Value
-                
             End If
         Next i
         
@@ -105,5 +96,6 @@ Sub summarizeTradingData()
         sheet.Cells(4, 17) = maxVolume
     Next sheet
 End Sub
+
 
 
